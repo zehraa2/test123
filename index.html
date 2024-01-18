@@ -2,158 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine PWA</title>
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
-<style>
-    body {
-        background-color: #f0f0f0;
-        color: green;
-        margin: 0;
-        padding: 0;
-    }
-    nav {
-        background-color: #808080;
-        padding: 15px;
-    }
-    nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-    }
-    nav li {
-        margin-right: 15px;
-    }
-    nav a {
-        text-decoration: none;
-        color: green;
-        transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-        color: #FFFFFF;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    th, td {
-      text-align: left;
-      padding: 80px;
-      border: 1px solid black;
-    }
-    th {
-      background-color: blue;
-      color: white;
-    }
-
-</style>
-
-<nav>
-    <ul>
-        <li><a href="homepage.html">Homepage</a></li>
-        <li><a href="index.html">Main</a></li>
-        <li><a href="batterie.html">Batterie Status</a></li>
-        <li><a href="noteboard.html">Noteboard</a></li>
-    </ul>
-</nav>
-
-<style>
-    .test-element {
-  height: 100px;
-  background-color: green;
-  width: 100px;
-  z-index: 5;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  color: white;
-  text-align: center;
-  -ms-touch-action: none;
-}
-
-</style>
-
-<div class="test-element">Drag me with one finger</div>
-<div class="test-element">Drag me with another finger</div>
-<div class="test-element">Drag me too</div>
-
-
-<script>
-    function startDrag(e) {
-    this.ontouchmove = this.onmspointermove = moveDrag;
-
-    this.ontouchend = this.onmspointerup = function () {
-    this.ontouchmove = this.onmspointermove = null;
-    this.ontouchend = this.onmspointerup = null;
-    }
-
-    var pos = [this.offsetLeft, this.offsetTop];
-    var that = this;
-    var origin = getCoors(e);
-
-    function moveDrag(e) {
-    var currentPos = getCoors(e);
-    var deltaX = currentPos[0] - origin[0];
-    var deltaY = currentPos[1] - origin[1];
-    this.style.left = (pos[0] + deltaX) + 'px';
-    this.style.top = (pos[1] + deltaY) + 'px';
-    return false; // cancels scrolling
-    }
-
-    function getCoors(e) {
-    var coors = [];
-    if (e.targetTouches && e.targetTouches.length) {
-    var thisTouch = e.targetTouches[0];
-    coors[0] = thisTouch.clientX;
-    coors[1] = thisTouch.clientY;
-    } else {
-    coors[0] = e.clientX;
-    coors[1] = e.clientY;
-    }
-    return coors;
-    }
-    }
-
-    var elements = document.querySelectorAll('.test-element');
-    [].forEach.call(elements, function (element) {
-    element.ontouchstart = element.onmspointerdown = startDrag;
-    });
-
-    document.ongesturechange = function () {
-    return false;
-    }
-</script>
-
-<table>
-    <tr>
-        <th>Aufgaben</th>
-        <th>In Bearbeitung</th>
-        <th>Erledigt</th>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-</table>
-
-
-<script src="js/app.js"></script>
-
-
+    <h1>Progressive Web App</h1>
+    <p>Hallo</p>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registriert:', registration);
+                })
+                .catch(error => {
+                    console.error('Fehler bei der Registrierung des Service Workers:', error);
+                });
+        }
+    </script>
 </body>
 </html>
